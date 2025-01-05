@@ -1,0 +1,130 @@
+.header-principal {
+  background-color: #31086a;
+  width: 100%;
+  height: 50px;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.menu-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 30px;
+  padding-right: 20px;
+  list-style: none;
+  z-index: 2;
+}
+.menu-nav ul {
+  display: flex;
+  justify-content: flex-end;
+  gap: 70px;
+  margin-right: 50px;
+  padding: 0;
+  list-style: none;
+}
+.menu-nav ul li a {
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: #faeaff;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.menu-nav ul li {
+  margin-bottom: 10px;
+  padding: 5px 0;
+}
+
+.menu-nav ul li a:hover {
+  color: #c5a3ff;
+}
+
+/* MENÚ HAMBURGUESA */
+.menu-hamburguesa {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  cursor: pointer;
+}
+
+.menu-hamburguesa img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.1s ease;
+}
+
+.menu-hamburguesa:active img {
+  transform: scale(0.9);
+}
+
+@media (max-width: 768px) {
+  .header-principal {
+    background-color: transparent;
+    position: absolute;
+  }
+  
+  .menu-hamburguesa {
+    display: block;
+  }
+
+  .menu-nav {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    width: 20%;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 2;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .menu-nav.activo {
+    display: flex;
+    opacity: 1;
+  }
+
+  .menu-nav ul {
+    display: none;
+    flex-direction: column;
+  }
+
+  .menu-nav ul{
+    gap: 10px;
+  }
+
+  .menu-nav.activo ul {
+    position: absolute;
+    top: 30%;
+    right: 25%;
+    gap: 5px;
+    display: flex;
+    background-color: #31086a;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .menu-nav.activo ul li a:hover {
+    color: #c5a3ff;
+  }
+
+  .menu-nav ul li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .menu-nav ul li a {
+    text-align: center;
+    padding: 10px 0;
+    color: #faeaff;
+    font-size: 1.2rem;
+  }
+
+  .menu-nav ul li a:hover {
+    color: #6646b3;
+  }
+}

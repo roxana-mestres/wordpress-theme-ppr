@@ -1,0 +1,5 @@
+*.log
+wp-config.php
+/uploads
+/cache
+/node_modules

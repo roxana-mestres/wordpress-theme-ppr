@@ -1,0 +1,228 @@
+/* FOOTER */
+.footer {
+  background-color: #31086a;
+  color: #faeaff;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 0;
+  height: 150px;
+}
+
+.footer-contenido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+
+.footer-imagen,
+.footer-texto,
+.footer-contacto {
+  flex: 1;
+}
+
+.footer-imagen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-imagen img {
+  width: 200px;
+  height: auto;
+}
+
+.footer-texto {
+  flex: 3;
+  text-align: center;
+  font-family: "Bodoni Moda", serif;
+}
+
+.footer-titulo {
+  font-size: 2rem;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.footer-descripcion {
+  font-size: 1.5rem;
+  margin: 15px 0 0 0;
+}
+
+.footer-descripcion a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-descripcion a:hover {
+  color: #c5a3ff;
+}
+
+.footer-contacto {
+  text-align: left;
+  font-family: "Bodoni Moda", serif;
+}
+
+.footer-contacto p {
+  font-size: 1.5rem;
+  padding-bottom: 20px;
+}
+
+.contacto-iconos {
+  display: flex;
+  justify-content: left;
+  gap: 15px;
+}
+
+.contacto-icono img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.contacto-icono img:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
+
+  .footer-contenido {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-imagen {
+    display: none;
+  }
+
+  .footer-texto {
+    text-align: center;
+  }
+
+  .footer-contacto {
+    text-align: center;
+  }
+
+  .contacto-iconos {
+    justify-content: center;
+  }
+
+  .footer-contacto p {
+    display: none;
+  }
+
+  .footer-texto {
+    flex: 3;
+    text-align: center;
+  }
+
+  .footer-descripcion {
+    font-size: 1rem;
+  }
+}
+
+/* BUSCADOR */
+.buscador {
+  display: flex;
+  justify-content: flex-end;
+  padding: 40px;
+}
+
+.form-buscador {
+  width: 100%;
+  max-width: 300px;
+}
+
+.input-contenedor {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #31086a;
+  border: 2px solid #31086a;
+  border-radius: 30px;
+  padding-left: 40px;
+}
+
+.input-buscador {
+  padding: 10px 15px;
+  color: #faeaff;
+  padding-right: 40px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  width: 100%;
+  background-color: #31086a;
+}
+
+.icono-buscador {
+  position: absolute;
+  top: 16%;
+  left: 15px;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .buscador {
+    justify-content: center;
+  }
+}
+
+/* MENÚ COMPARTIR */
+.menu-compartir {
+  display: none;
+  position: absolute;
+  background: #31086a;
+  border: 3px solid #c5a3ff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.menu-compartir a {
+  display: block;
+  margin: 5px 0;
+  text-decoration: none;
+  color: #faeaff;
+  font-size: 14px;
+  text-align: left;
+}
+
+.abrir-menu-compartir {
+  cursor: pointer;
+}
+
+.menu-compartir a:hover {
+  color: #c5a3ff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.compartir:hover .menu-compartir {
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+
+  .interaccion-entrada img {
+    width: 25px;
+    height: 25px;
+    padding-right: 0;
+  }
+
+  .comentar img {
+    width: 20px;
+    height: 20px;
+  }
+}
