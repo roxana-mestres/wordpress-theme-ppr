@@ -297,34 +297,68 @@ function limpiar_clases_y_estilos($content) {
 }
 add_filter('the_content', 'limpiar_clases_y_estilos');
 
-// REEMPLAZAR FIGURE POR DIV
+function establecer_imagen_destacada_automatica() {
+    // Obtener todas las publicaciones
+    $posts = get_posts([
+        'numberposts' => -1, // Todas las publicaciones
+        'post_type'   => 'post',
+        'post_status' => 'publish'
+    ]);
 
-function reemplazar_imagen_destacada($content) {
-    // Cargar DOMDocument
-    $dom = new DOMDocument();
-    libxml_use_internal_errors(true);
-    $dom->loadHTML('<?xml encoding="utf-8" ?>' . $content);
-    libxml_clear_errors();
+    foreach ($posts as $post) {
+        // Verificar si ya tiene una imagen destacada
+        if (has_post_thumbnail($post->ID)) {
+            continue; // Saltar si ya tiene una
+        }
 
-    $figures = $dom->getElementsByTagName('figure');
+        // Extraer la primera imagen del contenido
+        $content = $post->post_content;
+        preg_match('/<img.*?src=["\'](.*?)["\'].*?>/', $content, $matches);
 
-    foreach ($figures as $figure) {
-        $classes = $figure->getAttribute('class');
+        if (isset($matches[1])) {
+            $image_url = $matches[1];
 
-        if (strpos($classes, 'wp-block-image') !== false) {
-            $div = $dom->createElement('div');
-            $div->setAttribute('class', 'imagen-destacada');
+            // Subir la imagen a la librería de medios y establecerla como imagen destacada
+            $attachment_id = importar_imagen_destacada($image_url, $post->ID);
 
-            while ($figure->hasChildNodes()) {
-                $div->appendChild($figure->firstChild);
+            if ($attachment_id) {
+                set_post_thumbnail($post->ID, $attachment_id);
+                error_log("Imagen destacada establecida para la publicación ID: " . $post->ID);
             }
-
-            $figure->parentNode->replaceChild($div, $figure);
         }
     }
-
-    return $dom->saveHTML();
 }
-add_filter('the_content', 'reemplazar_imagen_destacada');
+add_action('init', 'establecer_imagen_destacada_automatica');
+
+function importar_imagen_destacada($image_url, $post_id) {
+    require_once(ABSPATH . 'wp-admin/includes/file.php');
+    require_once(ABSPATH . 'wp-admin/includes/media.php');
+    require_once(ABSPATH . 'wp-admin/includes/image.php');
+
+    // Descargar la imagen
+    $tmp = download_url($image_url);
+
+    if (is_wp_error($tmp)) {
+        return false;
+    }
+
+    // Crear un array de archivo simulado para cargarlo en la librería de medios
+    $file_array = [
+        'name'     => basename($image_url),
+        'tmp_name' => $tmp
+    ];
+
+    // Subir la imagen a la librería de medios
+    $attachment_id = media_handle_sideload($file_array, $post_id);
+
+    // Verificar si hubo un error al cargar la imagen
+    if (is_wp_error($attachment_id)) {
+        @unlink($tmp);
+        return false;
+    }
+
+    return $attachment_id;
+}
+
 
 ?>
