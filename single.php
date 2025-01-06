@@ -14,7 +14,7 @@
                         </div>
                     <?php endif; ?>
                     <!-- CONTENIDO -->
-                    <div class="contenido">
+                    <div class="contenido js-columnas-dinamicas" data-template="<?php echo esc_url(get_template_directory_uri()); ?>">
                         <?php the_content(); ?>
                     </div>
                 </div>
@@ -42,15 +42,15 @@
                         </div>
                     </div>
                 </div>
-            <div class="comentarios-entrada" id="comentarios-entrada">
-                <?php
-                if (comments_open() || get_comments_number()) :
-                    comments_template();
-                else :
-                    echo '<p>Los comentarios están cerrados para esta entrada.</p>';
-                endif;
-                ?>
-            </div>
+                <div class="comentarios-entrada" id="comentarios-entrada">
+                    <?php
+                    if (comments_open() || get_comments_number()) :
+                        comments_template();
+                    else :
+                        echo '<p>Los comentarios están cerrados para esta entrada.</p>';
+                    endif;
+                    ?>
+                </div>
             </article>
     <?php endwhile;
     endif; ?>

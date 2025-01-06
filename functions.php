@@ -129,6 +129,21 @@ function cargar_scripts_contacto()
 }
 add_action('wp_enqueue_scripts', 'cargar_scripts_contacto');
 
+/* AÑADIR JS PARA SINGLE */
+function cargar_scripts_single()
+{
+    if (is_single()) {
+        wp_enqueue_script(
+            'single-js',
+            get_template_directory_uri() . '/assets/js/single.js',
+            array(),
+            null,
+            true
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'cargar_scripts_single');
+
 // FILTRO POR LETRA
 function filtrar_por_letra($where, $query)
 {
@@ -248,5 +263,28 @@ function transformar_titulo($title) {
     return $title;
 }
 add_filter('the_title', 'transformar_titulo');
+
+// FUNCIÓN PARA ELIMINAR EMBEDS COMO VIDEOS DE YOUTUBE
+function eliminar_embeds($content) {
+    $content = preg_replace('/<iframe.*?\\/iframe>/is', '', $content);
+
+    $content = preg_replace('/<embed.*?\\/embed>/is', '', $content);
+
+    return $content;
+}
+add_filter('the_content', 'eliminar_embeds');
+
+// FUNCIÓN PARA LIMPIAR FORMATO DE CONTENIDO (NEGRITAS, CURSIVAS, ENLACES)
+
+function limpiar_formato_contenido($content) {
+    $content = preg_replace('/<\\/?(strong|b|i|em|u)>/', '', $content);
+    
+    $content = preg_replace('/<a\\b[^>]*>(.*?)<\\/a>/', '$1', $content);
+
+    $content = '<div style="text-align: left; color: #31086a;">' . $content . '</div>';
+
+    return $content;
+}
+add_filter('the_content', 'limpiar_formato_contenido');
 
 ?>

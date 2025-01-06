@@ -1,127 +1,228 @@
 .entrada {
-    background-color: #faeaff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 40px;
-    margin: 0 auto;
+  background-color: #faeaff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 40px;
+  margin: 0 auto;
+}
+
+.titulo-entrada {
+  font-family: "Oooh Baby", serif;
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 400;
+  text-align: center;
+  color: #31086a;
+  padding-top: 50px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+div.imagen-destacada {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagen-destacada img {
+  width: 100%;
+  height: auto;
+}
+
+.entrada-contenido {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.entrada:nth-child(even) .entrada-contenido {
+  flex-direction: row-reverse;
+}
+
+.contenido {
+  width: 80%;
+  text-align: left;
+  color: #31086a;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.8;
+  margin: 0 auto;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 900px) {
+  .entrada .imagen-destacada {
+    display: none !important;
+  }
+  .contenido {
+    width: 100%;
+  }
+  .titulo-entrada {
+    padding-top: 80px;
+  }
+  .contenido {
+    font-size: 1rem;
+  }
+}
+
+/* CONTENIDO 2 COLUMNAS PARA TEXTOS LARGOS */
+
+.contenido.js-columnas-dinamicas {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 20px;
+  width: 70%;
+}
+
+.img-bloque {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.img-bloque img {
+  max-width: 100%;
+  height: auto;
+}
+
+.bloque-uno {
+  width: 50%;
+  padding-left: 20px;
+}
+
+.img-bloque .imagen-destacada {
+  flex: 1;
+  max-width: 100%;
+}
+
+.img-bloque .bloque-uno {
+  flex: 1;
+}
+
+.fila-columnas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.columna {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  min-width: 300px;
+}
+
+.separador {
+  width: 100%;
+  text-align: center;
+  max-width: 800px;
+  padding-right: 100px;
+  margin: 30px 0;
+}
+
+.separador img {
+  width: 300px;
+  height: auto;
+  opacity: 0.7;
+}
+
+@media (max-width: 900px) {
+  .separador{
+    display: none;
   }
 
-  .contenido p{
-    font-size: 1rem;
+  .fila-columnas {
+    display: block;
+    width: 100%;
+    margin: 0;
+  }
+
+  .columna {
+    flex: none;
+    width: 100%;
+    min-width: unset;
     margin-bottom: 20px;
   }
-  
-  .titulo-entrada {
-    font-family: "Oooh Baby", serif;
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 400;
-    text-align: center;
-    color: #31086a;
-    padding-top: 50px;
-    margin-bottom: 10px;
+
+  .img-bloque {
+    display: block;
     width: 100%;
   }
-  
-  div.imagen-destacada {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .imagen-destacada img {
-    width: 80%;
-    height: auto;
-  }
-  
-  .entrada-contenido {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    width: 70%;
-    margin: 0 auto;
-  }
-  
-  .entrada:nth-child(even) .entrada-contenido {
-    flex-direction: row-reverse;
-  }
-  
-  .contenido {
-    width: 80%;
-    text-align: left;
-    color: #31086a;
-    font-family: "Poppins", sans-serif;
-    line-height: 1.8;
-    margin: 0 auto;
-  }
-  
-  @media (max-width: 900px) {
-    .entrada .imagen-destacada {
-      display: none !important;
-    }
-    .contenido {
-      width: 100%;
-    }
-    .titulo-entrada {
-      padding-top: 80px;
-    }
-    .contenido p{
-      font-size: 0.8rem;
-    }
-  }
-  
-  /* DIV ICONOS SEGUIR LEYENDO - COMENTAR - COMPARTIR */
-  .interaccion-entrada {
+
+  .bloque-uno {
     width: 100%;
-    height: 60px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 0;
-    background-color: #31086a;
-    color: #faeaff;
-    font-family: "Poppins", sans-serif;
-    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    padding-left: 0;
   }
-  
+
+}
+
+/* DIV ICONOS SEGUIR LEYENDO - COMENTAR - COMPARTIR */
+.interaccion-entrada {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  background-color: #31086a;
+  color: #faeaff;
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+}
+
+.interaccion-entrada a {
+  text-decoration: none;
+  color: #faeaff;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.3s ease;
+}
+
+.interaccion-entrada a:hover {
+  color: #c5a3ff;
+}
+
+.interaccion-entrada img {
+  width: 30px;
+  height: 30px;
+  padding-right: 10px;
+}
+
+.compartir img {
+  transform: rotateY(180deg);
+}
+
+@media (max-width: 765px) {
   .interaccion-entrada a {
-    text-decoration: none;
-    color: #faeaff;
-    display: flex;
-    align-items: center;
+    font-size: 0.8rem;
     gap: 5px;
-    transition: color 0.3s ease;
   }
-  
-  .interaccion-entrada a:hover {
-    color: #c5a3ff;
-  }
-  
+
   .interaccion-entrada img {
-    width: 30px;
-    height: 30px;
-    padding-right: 10px;
+    width: 20px;
+    height: 20px;
+    padding-right: 3px;
   }
-  
-  .compartir img {
-    transform: rotateY(180deg);
+  .interaccion-entrada,
+  .interaccion-entrada a {
+    gap: 0;
   }
-
-  @media (max-width: 765px) {
-    .interaccion-entrada a {
-      font-size: 0.8rem;
-      gap: 5px;
-    }
-
-    .interaccion-entrada img{
-      width: 20px;
-      height: 20px; 
-      padding-right: 3px;
-    }
-    .interaccion-entrada, .interaccion-entrada a{
-      gap: 0;
-    }
-  }
+}
