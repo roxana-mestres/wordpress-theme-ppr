@@ -287,4 +287,24 @@ function limpiar_formato_contenido($content) {
 }
 add_filter('the_content', 'limpiar_formato_contenido');
 
+// SOBREESCRIBIR COLOR TEXTO P
+function palabras_para_recordar_filtrar_estilo_contenido($content) {
+    $style = 'style="color: #31086a !important;"';
+    $content = preg_replace('/<p>/', '<p ' . $style . '>', $content);
+    return $content;
+}
+add_filter('the_content', 'palabras_para_recordar_filtrar_estilo_contenido');
+
+// REEMPLAZAR FIGURE POR DIV
+
+function reemplazar_figure_por_div($content) {
+    $content = str_replace('<figure class="wp-block-image', '<div class="imagen-destacada', $content);
+
+    $content = str_replace('</figure>', '</div>', $content);
+
+    return $content;
+}
+add_filter('the_content', 'reemplazar_figure_por_div');
+
+
 ?>
