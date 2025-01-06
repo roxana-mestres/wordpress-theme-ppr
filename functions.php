@@ -288,23 +288,43 @@ function limpiar_formato_contenido($content) {
 add_filter('the_content', 'limpiar_formato_contenido');
 
 // SOBREESCRIBIR COLOR TEXTO P
-function palabras_para_recordar_filtrar_estilo_contenido($content) {
-    $style = 'style="color: #31086a !important;"';
-    $content = preg_replace('/<p>/', '<p ' . $style . '>', $content);
+function limpiar_clases_y_estilos($content) {
+    $content = preg_replace('/<p class="wp-elements-[^"]+"/', '<p', $content);
+
+    $content = preg_replace('/style="([^"]+)"/', 'style="/* $1 */"', $content);
+
     return $content;
 }
-add_filter('the_content', 'palabras_para_recordar_filtrar_estilo_contenido');
+add_filter('the_content', 'limpiar_clases_y_estilos');
 
 // REEMPLAZAR FIGURE POR DIV
 
-function reemplazar_figure_por_div($content) {
-    $content = str_replace('<figure class="wp-block-image', '<div class="imagen-destacada', $content);
+function reemplazar_imagen_destacada($content) {
+    // Cargar DOMDocument
+    $dom = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $dom->loadHTML('<?xml encoding="utf-8" ?>' . $content);
+    libxml_clear_errors();
 
-    $content = str_replace('</figure>', '</div>', $content);
+    $figures = $dom->getElementsByTagName('figure');
 
-    return $content;
+    foreach ($figures as $figure) {
+        $classes = $figure->getAttribute('class');
+
+        if (strpos($classes, 'wp-block-image') !== false) {
+            $div = $dom->createElement('div');
+            $div->setAttribute('class', 'imagen-destacada');
+
+            while ($figure->hasChildNodes()) {
+                $div->appendChild($figure->firstChild);
+            }
+
+            $figure->parentNode->replaceChild($div, $figure);
+        }
+    }
+
+    return $dom->saveHTML();
 }
-add_filter('the_content', 'reemplazar_figure_por_div');
-
+add_filter('the_content', 'reemplazar_imagen_destacada');
 
 ?>
