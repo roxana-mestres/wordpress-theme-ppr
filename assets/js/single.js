@@ -48,6 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("Texto completo procesado:", textoCompleto);
 
   const totalPalabras = textoCompleto
+    .replace(/<[^>]*>/g, "")
+    .replace(/[.,!?]/g, " ")
     .split(/\s+/)
     .filter((palabra) => palabra !== "").length;
 
@@ -75,7 +77,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let contadorPalabras = 0;
 
   oraciones.forEach((oracion) => {
-    const palabrasEnOracion = oracion.split(/\s+/).filter((palabra) => palabra !== "").length;
+    const palabrasEnOracion = oracion
+      .split(/\s+/)
+      .filter((palabra) => palabra !== "").length;
 
     if (contadorPalabras + palabrasEnOracion > 80) {
       if (contadorBloques === 0) {
