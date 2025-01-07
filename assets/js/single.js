@@ -18,19 +18,22 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   const contenido = document.querySelector(".js-columnas-dinamicas");
-  if (!contenido) return;
+  if (!contenido) {
+    console.log("No se encontró el elemento .js-columnas-dinamicas");
+    return;
+  }
 
-  function procesarNodo(node) {
-    if (node.nodeType === Node.TEXT_NODE) {
-      const texto = node.textContent.trim();
+  function procesarNodo(nodo) {
+    if (nodo.nodeType === Node.TEXT_NODE) {
+      const texto = nodo.textContent.trim();
       return texto !== "" ? texto : "";
-    } else if (node.nodeName === "BR") {
+    } else if (nodo.nodeName === "BR") {
       return "<br>";
-    } else if (node.nodeName === "P") {
-      const contenidoP = Array.from(node.childNodes).map(procesarNodo).join("");
+    } else if (nodo.nodeName === "P") {
+      const contenidoP = Array.from(nodo.childNodes).map(procesarNodo).join("");
       return `<p>${contenidoP}</p>`;
-    } else if (node.nodeType === Node.ELEMENT_NODE) {
-      return Array.from(node.childNodes).map(procesarNodo).join("");
+    } else if (nodo.nodeType === Node.ELEMENT_NODE) {
+      return Array.from(nodo.childNodes).map(procesarNodo).join("");
     }
     return "";
   }
@@ -42,89 +45,90 @@ document.addEventListener("DOMContentLoaded", function () {
     .replace(/class="[^"]*"/g, "")
     .trim();
 
+  console.log("Texto completo procesado:", textoCompleto);
+
   const totalPalabras = textoCompleto
     .split(/\s+/)
     .filter((palabra) => palabra !== "").length;
 
-  if (totalPalabras <= 250) {
+  console.log("Total de palabras:", totalPalabras);
+
+  if (totalPalabras <= 200) {
     const imagenDestacada = document.querySelector(".imagen-destacada img");
     const entradaContenido = document.querySelector(".entrada-contenido");
     if (imagenDestacada) {
       imagenDestacada.style.maxWidth = "90%";
       entradaContenido.style.maxWidth = "80%";
     }
-  }
-
-  if (totalPalabras <= 250) {
     contenido.innerHTML = textoCompleto;
     return;
   }
 
-  const oraciones = textoCompleto.split(/(?<=\.)/);
-
+  const oraciones = textoCompleto.split(/(?<=[.!?—:;])/);
   contenido.innerHTML = "";
 
-  let currentBlock = document.createElement("div");
-  currentBlock.classList.add("bloque-uno");
+  let bloqueActual = document.createElement("div");
+  bloqueActual.classList.add("bloque-uno");
 
-  let blockCounter = 0;
+  let contadorBloques = 0;
   let filaColumnas = null;
-  let wordCount = 0;
+  let contadorPalabras = 0;
 
   oraciones.forEach((oracion) => {
-    const palabrasEnOracion = oracion
-      .split(/\s+/)
-      .filter((palabra) => palabra !== "").length;
+    const palabrasEnOracion = oracion.split(/\s+/).filter((palabra) => palabra !== "").length;
 
-    wordCount += palabrasEnOracion;
-
-    currentBlock.innerHTML += oracion;
-
-    const wordLimit = 100;
-
-    if (wordCount >= wordLimit && oracion.endsWith(".")) {
-      if (blockCounter === 0) {
-        const imgBlock = document.createElement("div");
-        imgBlock.classList.add("img-bloque");
+    if (contadorPalabras + palabrasEnOracion > 80) {
+      if (contadorBloques === 0) {
+        const bloqueImagen = document.createElement("div");
+        bloqueImagen.classList.add("img-bloque");
         const imagenDestacada = document.querySelector(".imagen-destacada");
-        imgBlock.appendChild(imagenDestacada);
-        imgBlock.appendChild(currentBlock);
-        contenido.appendChild(imgBlock);
+        if (imagenDestacada) {
+          bloqueImagen.appendChild(imagenDestacada);
+        }
+        bloqueImagen.appendChild(bloqueActual);
+        contenido.appendChild(bloqueImagen);
       } else {
-        if (blockCounter % 2 === 0) {
+        if (!filaColumnas || filaColumnas.childElementCount === 2) {
           filaColumnas = document.createElement("div");
           filaColumnas.classList.add("fila-columnas");
           contenido.appendChild(filaColumnas);
         }
 
-        if (filaColumnas && currentBlock.innerHTML.trim() !== "") {
-          currentBlock.classList.add("columna");
-          limpiarLineaInicial(currentBlock);
-          filaColumnas.appendChild(currentBlock);
+        if (filaColumnas && bloqueActual.innerHTML.trim() !== "") {
+          bloqueActual.classList.add("columna");
+          limpiarLineaInicial(bloqueActual);
+          filaColumnas.appendChild(bloqueActual);
         }
       }
 
-      if (blockCounter % 2 === 1) {
-        const separador = document.createElement("div");
-        separador.classList.add("separador");
-        separador.innerHTML = `<img src="${contenido.dataset.template}/assets/images/separador.svg" alt="Separador">`;
-        contenido.appendChild(separador);
-      }
-
-      currentBlock = document.createElement("div");
-      currentBlock.classList.add("bloque-texto");
-      wordCount = 0;
-      blockCounter++;
+      bloqueActual = document.createElement("div");
+      bloqueActual.classList.add("bloque-texto");
+      contadorPalabras = 0;
+      contadorBloques++;
     }
+
+    bloqueActual.innerHTML += oracion;
+    contadorPalabras += palabrasEnOracion;
   });
 
-  if (filaColumnas && filaColumnas.childElementCount > 2) {
-    const nuevaFila = document.createElement("div");
-    nuevaFila.classList.add("fila-columnas");
-
-    const ultimaColumna = filaColumnas.lastElementChild;
-    nuevaFila.appendChild(ultimaColumna);
-
-    contenido.appendChild(nuevaFila);
+  if (bloqueActual.innerHTML.trim() !== "") {
+    if (!filaColumnas || filaColumnas.childElementCount === 2) {
+      filaColumnas = document.createElement("div");
+      filaColumnas.classList.add("fila-columnas");
+      contenido.appendChild(filaColumnas);
+    }
+    bloqueActual.classList.add("columna");
+    limpiarLineaInicial(bloqueActual);
+    filaColumnas.appendChild(bloqueActual);
   }
+
+  const filas = document.querySelectorAll(".fila-columnas, .img-bloque");
+  filas.forEach((fila, indice) => {
+    const separador = document.createElement("div");
+    separador.classList.add("separador");
+    separador.innerHTML = `<img src="${contenido.dataset.template}/assets/images/separador.svg" alt="Separador">`;
+    fila.after(separador);
+  });
+
+  console.log("Finalizado el procesamiento de bloques.");
 });
