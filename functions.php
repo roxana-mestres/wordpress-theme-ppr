@@ -297,4 +297,13 @@ function limpiar_clases_y_estilos($content) {
 }
 add_filter('the_content', 'limpiar_clases_y_estilos');
 
+// ELIMINAR NOMBRE - CORREO COMENTARIOS
+
+function remove_comment_fields($fields) {
+    unset($fields['author']);
+    unset($fields['email']);
+    return $fields;
+}
+add_filter('comment_form_default_fields', 'remove_comment_fields');
+
 ?>

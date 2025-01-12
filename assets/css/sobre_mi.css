@@ -44,10 +44,6 @@ body {
   align-items: center;
   margin-bottom: 50px;
 }
-div.texto p {
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-  text-align: justify;
-}
 
 .footer-descripcion p{
   text-align: center;
@@ -67,6 +63,11 @@ div.texto p {
 .seccion-cuatro p,
 .seccion-cinco p {
   line-height: 2.5;
+}
+
+div.texto p{
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  text-align: justify;
 }
 
 .seccion-cinco{
@@ -182,5 +183,10 @@ div.texto p {
   }
   h1.titulo {
     margin-top: 100px;
+  }
+
+  div.texto p, .seccion-dos p, .seccion-cuatro p{
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    text-align: left;
   }
 }
