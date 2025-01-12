@@ -4,7 +4,7 @@ body {
 .sobre-mi {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: #31086a;
   line-height: 2;
   padding: 20px;
@@ -44,9 +44,13 @@ body {
   align-items: center;
   margin-bottom: 50px;
 }
-section p {
-  font-size: 1rem;
+div.texto p {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
   text-align: justify;
+}
+
+.footer-descripcion p{
+  text-align: center;
 }
 .seccion-uno,
 .seccion-dos,
@@ -64,6 +68,12 @@ section p {
 .seccion-cinco p {
   line-height: 2.5;
 }
+
+.seccion-cinco{
+  padding-bottom: 50px;
+  box-sizing: border-box;
+}
+
 .icono-brujula {
   max-width: 30%;
   margin-right: 20px;
@@ -99,13 +109,13 @@ section p {
 
 @media (max-width: 1300px) {
   .icono-mariposas {
-    bottom: -190px;
+    bottom: -170px;
   }
 }
 
 @media (min-width: 1500px) {
   .icono-mariposas {
-    bottom: -270px;
+    bottom: -230px;
   }
 }
 

@@ -11,7 +11,7 @@ get_header();
     <section class="seccion-uno">
         <div class="texto">
             <p>
-                Estoy profundamente agradecida a mi madrepor su buen gusto al nombrarme Roxane. Creo que este nombre, cargado de fuerza y poesía, ha impregnado mi vida de unasingularidad especial, marcando mi destino. Nací un martes de octubre, en el extremo surdel continente americano, en un país estrechoy alargado que se desliza entre montañas y elocéano Pacífico. Un «largo pétalo de mar», como lo describió Neruda. Ese rincón del mundo, velado entre la naturaleza y la poesía, fue mi punto de partida.
+                Estoy profundamente agradecida a mi madre por su buen gusto al nombrarme Roxane. Creo que este nombre, cargado de fuerza y poesía, ha impregnado mi vida de una singularidad especial, marcando mi destino. Nací un martes de octubre, en el extremo sur del continente americano, en un país estrecho y alargado que se desliza entre montañas y el océano Pacífico. Un «largo pétalo de mar», como lo describió Neruda. Ese rincón del mundo, velado entre la naturaleza y la poesía, fue mi punto de partida.
             </p>
         </div>
         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/imagen-perfil-sobre-mi.svg" alt="Imagen de perfil" class="perfil-img">

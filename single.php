@@ -14,7 +14,7 @@
                         </div>
                     <?php endif; ?>
                     <!-- CONTENIDO -->
-                    <div class="contenido js-columnas-dinamicas" data-template="<?php echo esc_url(get_template_directory_uri()); ?>">
+                    <div class="contenido" data-template="<?php echo esc_url(get_template_directory_uri()); ?>">
                         <?php the_content(); ?>
                     </div>
                 </div>

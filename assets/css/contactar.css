@@ -99,9 +99,10 @@ section.formulario-contacto {
   justify-content: center;
   align-items: center;
   text-align: left;
-  height: 150vh;
+  height: auto;
   width: 600px;
   margin: 0 auto;
+  padding: 50px;
   position: relative;
 }
 
@@ -177,12 +178,6 @@ button:hover {
 
 .estampillas img {
   max-width: 150px;
-}
-
-@media screen and (min-width: 1300px){
-  section.formulario-contacto {
-    height: 120vh;
-  }
 }
 
 @media screen and (max-width: 768px) {

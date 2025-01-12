@@ -204,7 +204,7 @@ div.imagen-destacada {
   text-align: left;
   color: #31086a;
   font-family: "Poppins", sans-serif;
-  font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
   line-height: 2;
   margin: 0 auto;
   overflow: hidden;
@@ -226,8 +226,8 @@ div.imagen-destacada {
 }
 
 @media (max-width: 900px) {
-  .entrada .imagen-destacada {
-    display: none !important;
+  .entrada-contenido, .entrada:nth-child(even) .entrada-contenido{
+    flex-direction: column;
   }
   .contenido {
     width: 100%;

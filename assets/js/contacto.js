@@ -13,10 +13,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 method: 'POST',
                 body: datos
             })
-            .then(respuesta => respuesta.json())
+            .then(respuesta => {
+                return respuesta.json();
+            })
             .then(data => {
                 if (data.success) {
                     alert('Gracias por tu mensaje. Me pondré en contacto contigo a la brevedad.');
+                    formulario.reset();
                 } else {
                     alert('Hubo un error al enviar tu mensaje. Inténtalo nuevamente más tarde.');
                 }
