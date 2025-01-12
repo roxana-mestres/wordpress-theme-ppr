@@ -129,21 +129,6 @@ function cargar_scripts_contacto()
 }
 add_action('wp_enqueue_scripts', 'cargar_scripts_contacto');
 
-/* AÑADIR JS PARA SINGLE */
-function cargar_scripts_single()
-{
-    if (is_single()) {
-        wp_enqueue_script(
-            'single-js',
-            get_template_directory_uri() . '/assets/js/single.js',
-            array(),
-            null,
-            true
-        );
-    }
-}
-add_action('wp_enqueue_scripts', 'cargar_scripts_single');
-
 // FILTRO POR LETRA
 function filtrar_por_letra($where, $query)
 {
