@@ -117,8 +117,10 @@ div.imagen-destacada {
   }
 }
 
-.single-entrada .entrada-contenido > figure {
+figure {
   display: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* DIV ICONOS SEGUIR LEYENDO - COMENTAR - COMPARTIR */
