@@ -55,7 +55,7 @@ div.imagen-destacada {
 }
 
 .contenido {
-  width: 80%;
+  width: 70%;
   text-align: left;
   color: #31086a;
   font-family: "Poppins", sans-serif;
@@ -115,12 +115,6 @@ div.imagen-destacada {
   .contenido::-webkit-scrollbar {
     display: none;
   }
-}
-
-figure {
-  display: none;
-  margin: 0;
-  padding: 0;
 }
 
 /* DIV ICONOS SEGUIR LEYENDO - COMENTAR - COMPARTIR */
