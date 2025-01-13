@@ -117,6 +117,10 @@ div.imagen-destacada {
   }
 }
 
+.single-entrada .entrada-contenido > figure {
+  display: none;
+}
+
 /* DIV ICONOS SEGUIR LEYENDO - COMENTAR - COMPARTIR */
 .interaccion-entrada {
   width: 100%;
